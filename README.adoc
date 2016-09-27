@@ -1,0 +1,13 @@
+= 2g interactive pager
+
+== hardware
+
+MT2502 based RePhone/Xadow GSM module, Li-ion battery, ssd1306 based 128x64 monochrome I2C OLED display, handheld qwerty keyboard
+
+== software
+
+slightly modified https://github.com/loboris/RePhone_on_Linux, a base for lua apps to work on MT2502
+
+== current state
+
+when turned on, displays four rows of `HELLO`
