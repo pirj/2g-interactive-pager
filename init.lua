@@ -1,40 +1,33 @@
--- initial
+sys.ledblink(REDLED)
 
-oled = require('oled')
+local oled = require('oled')
+local font = require('font')
+
+local message = 'Hello, world!'
 
 oled.init()
 
-h = {
-  { 0, 255 - 7, 128, 128, 128, 128, 255 - 7, 0 },
-  { 0, 31, 0, 0, 0, 0, 0, 31, 0 }
-}
+sys.ledblink(GREENLED)
 
-e = {
-  { 0, 255 - 7, 8 + 128, 8 + 128, 8 + 128, 8, 8, 0 },
-  { 0, 31, 16, 16, 16, 16, 16, 0 }
-}
-
-l = {
-  { 0, 255 - 7, 0, 0, 0, 0, 0, 0 },
-  { 0, 31, 16, 16, 16, 16, 16, 0 }
-}
-
-o = {
-  { 0, 255 - 15, 8, 8, 8, 8, 255 - 15, 0 },
-  { 0, 15, 16, 16, 16, 16, 15, 0 }
-}
-
-chars = { h, e, l, l, o }
-
+local count = 0
 function hello()
+  local message = "Hello, world" .. count
   oled.pos0()
-  for i, char in ipairs(chars) do
-    for i=1,8 do
-      oled.oct8t({ char[1][i], char[2][i], char[1][i], char[2][i], char[1][i], char[2][i], char[1][i], char[2][i] })
+  for index=1,message:len() do
+    local char = message:sub(index, index)
+    local bitmap = font[char]
+    if bitmap then
+      for i=1,8 do
+        oled.oct8t({ bitmap[1][i], bitmap[2][i], bitmap[1][i], bitmap[2][i], bitmap[1][i], bitmap[2][i], bitmap[1][i], bitmap[2][i] })
+      end
     end
   end
+  count = count + 1
 end
 
-t = timer.create(100, hello)
+t = timer.create(1000, hello)
+
+sys.ledblink(GREENLED)
+i2c.log('4')
 
 -- FIXME catch and display uncatched lua errors
