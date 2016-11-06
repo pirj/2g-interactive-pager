@@ -9,9 +9,10 @@ oled.init()
 
 sys.ledblink(GREENLED)
 
-local count = 0
 function hello()
-  local message = "Hello, world" .. count
+  local gpio1 = gpio.read(1)
+  local gpio2 = gpio.read(2)
+  local message = "GPIO 1 and 2: " .. gpio1 .. gpio2
   oled.pos0()
   for index=1,message:len() do
     local char = message:sub(index, index)
@@ -22,12 +23,14 @@ function hello()
       end
     end
   end
-  count = count + 1
 end
 
-t = timer.create(1000, hello)
+gpio.mode(1, INPUT_PULLUP)
+gpio.mode(2, INPUT_PULLUP)
 
-sys.ledblink(GREENLED)
-i2c.log('4')
+sys.ledblink(0)
+i2c.log('Starting up')
+
+global_timer = timer.create(1000, hello)
 
 -- FIXME catch and display uncatched lua errors

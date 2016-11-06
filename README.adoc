@@ -17,6 +17,10 @@ luabitop (for font pivot)
 
 when turned on, displays four rows of `Hello, world` with a count that increases once per second
 
+== debug
+
+    screen /dev/cu.usbmodem1411 115200
+
 == GOTCHAS
 
 global variables cannot be addressed from functions in init.lua (use local)
