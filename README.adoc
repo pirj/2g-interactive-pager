@@ -15,7 +15,13 @@ luabitop (for font pivot)
 
 == current state
 
-when turned on, displays four rows of `Hello, world` with a count that increases once per second
+when turned on, displays four rows of `GPIO 1 and 2: 0 0` with a GPIO 1 and 2 states read once per second:
+
+image::board.jpg[Board]
+
+also almost completely disassembled donor:
+
+image::donor.jpg[Donor]
 
 == debug
 
